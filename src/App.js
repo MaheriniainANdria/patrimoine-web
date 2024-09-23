@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import InputSection from './components/InputSection';
+import FluxImpossibles from './components/FluxImpossibles';
+import FluxJournaliers from './components/FluxJournaliers';
+import Graphique from './components/Graphique';
 
 function App() {
+  const [dates, setDates] = useState({ startDate: '', endDate: '' });
+
+  const handleDateChange = (startDate, endDate) => {
+    setDates({ startDate, endDate });
+    
+  };
+
+  
+  const fluxJournaliersData = [
+    { date: '2023-01-01', value: 100 },
+    { date: '2023-01-02', value: 200 },
+ 
+  ];
+
+  const categoriesData = [
+    { name: 'Revenus', key: 'value', color: 'rgba(75,192,192,1)' },
+
+  ];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Bienvenue à Patrimoine Web Interface</h1>
+      <InputSection onDateChange={handleDateChange} />
+      <FluxImpossibles />
+      <FluxJournaliers />
+      <Graphique fluxJournaliers={fluxJournaliersData} categories={categoriesData} />
     </div>
   );
 }
